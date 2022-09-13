@@ -1,5 +1,6 @@
 package com.challenge.products.controller;
 
+import com.challenge.products.domain.Producto;
 import com.challenge.products.dto.ProductoDto;
 import com.challenge.products.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,22 @@ public class ProductoController {
 
     @PostMapping("/agregar-producto")
     @ResponseStatus(HttpStatus.OK)
-    public ProductoDto addProduct(@RequestBody ProductoDto productoDto){
+    public Producto addProduct(@RequestBody ProductoDto productoDto){
         return productoService.createProduct(productoDto);
     }
 
     @GetMapping("/obtener-productos")
-    public List<ProductoDto> getProducts(){
+    public List<Producto> getProducts() {
         return productoService.getAllProducts();
+    }
+    @GetMapping("/obtener-producto-sku")
+    public Producto getProductBySku(@RequestParam Long sku) {
+        return productoService.getProductBySku(sku);
+    }
+
+    @PutMapping
+    public Producto updateProduct(@RequestParam Long sku, @RequestBody ProductoDto producto){
+        return null;
     }
 
 }
